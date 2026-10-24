@@ -1,0 +1,53 @@
+## [2026-10-24T14:25:00Z] SESSION START
+
+tool=Claude.ai web chat (Claude app, with code-execution sandbox)
+model=claude-opus-5-5
+Repo Root: /home/claude/repo
+Branch: main
+Worktree: main
+Parent Agent: none
+Language: py
+Time Remaining: not configured
+
+## [2026-10-24T14:30:00Z] Analyse challenge and build first pipeline
+
+User Prompt (verbatim, secrets redacted):
+Problem Statement & Instructions — Ghost Data Still Exists (pasted challenge text with links to problem_statement.md, the repository and dataset/deletion_requests.csv).
+
+Agent Response Summary:
+Cloned the repository, read problem_statement.md and AGENTS.md, and profiled every dataset file and evidence format (SQL, JSON, text, six log styles, PDFs, screenshots). Built identity resolution, an evidence normalizer, intent classification with a rule fallback, a policy/plan generator and an evaluation harness. First sample score: status 0.78, step F1 0.77. Identified that compliant records are only linkable through workflow activity timing.
+
+Actions:
+* git clone hackerrank-orchestrate-october26
+* created code/ghostaudit/{identity,evidence,llm,vision,intent,auditor}.py, code/main.py, code/evaluation/main.py
+* ran python3 code/evaluation/main.py --no-llm
+
+Context:
+tool=Claude.ai web chat (Claude app, with code-execution sandbox)
+model=claude-opus-5-5
+branch=main
+repo_root=/home/claude/repo
+worktree=main
+parent_agent=none
+
+## [2026-10-24T16:30:00Z] Workflow reconstruction, evaluation, packaging
+
+User Prompt (verbatim, secrets redacted):
+Continue
+
+Agent Response Summary:
+Fixed intent false negatives, added workflow reconstruction (reported_at windows, status-result mapping, run fingerprints), corrected tombstone and implicit-absence handling, and limited catalog-linked artifacts to a 14-day window. Sample status accuracy 0.969, step F1 0.960; generated-style samples 1.000 / 0.991. Added 5 custom adversarial cases (all pass), an output validator (518 rows, 0 errors), README, evaluation_report.md and auto-generated usage_report.md, then packaged code.zip.
+
+Actions:
+* edited code/ghostaudit/{intent,evidence,auditor}.py, code/main.py
+* created code/evaluation/{custom_cases,validate_output}.py, code/evaluation/evaluation_report.md, README.md
+* ran python3 code/main.py --no-llm; python3 code/evaluation/main.py --custom; python3 code/evaluation/validate_output.py
+* zip -r code.zip README.md code
+
+Context:
+tool=Claude.ai web chat (Claude app, with code-execution sandbox)
+model=claude-opus-5-5
+branch=main
+repo_root=/home/claude/repo
+worktree=main
+parent_agent=none
